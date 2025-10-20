@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affilizz Widget</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    <script src="https://www.affilizz.com/js/page-component.js" defer></script>
+</head>
+<body>
+    <affilizz-page-component loading="lazy" page-tiny-code=""></affilizz-page-component>
+    
+    <script>
+        // Récupère le code depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code') || 'jpMMg';
+        
+        // Applique le code au composant
+        const component = document.querySelector('affilizz-page-component');
+        if (component) {
+            component.setAttribute('page-tiny-code', code);
+        }
+    </script>
+</body>
+</html>
