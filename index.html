@@ -8,24 +8,46 @@
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        #loading {
+            text-align: center;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+            color: #666;
         }
     </style>
-    <script src="https://www.affilizz.com/js/page-component.js" defer></script>
 </head>
 <body>
+    <div id="loading">Chargement du widget...</div>
     <affilizz-page-component loading="lazy" page-tiny-code=""></affilizz-page-component>
+    
+    <script src="https://www.affilizz.com/js/page-component.js"></script>
     
     <script>
         // Récupère le code depuis l'URL
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code') || 'jpMMg';
         
-        // Applique le code au composant
-        const component = document.querySelector('affilizz-page-component');
-        if (component) {
-            component.setAttribute('page-tiny-code', code);
-        }
+        console.log('Code détecté:', code);
+        
+        // Attend que le script soit chargé
+        window.addEventListener('load', function() {
+            const component = document.querySelector('affilizz-page-component');
+            if (component) {
+                component.setAttribute('page-tiny-code', code);
+                console.log('Widget configuré avec le code:', code);
+                
+                // Cache le message de chargement après 2 secondes
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 2000);
+            } else {
+                console.error('Composant non trouvé');
+                document.getElementById('loading').innerHTML = 'Erreur: Composant non trouvé';
+            }
+        });
     </script>
 </body>
 </html>
